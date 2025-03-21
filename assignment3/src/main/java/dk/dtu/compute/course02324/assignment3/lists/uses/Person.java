@@ -16,7 +16,7 @@ public class Person implements Comparable<Person> {
         this.age = age;
     }
 
-    public int age;
+    private int age;
 
     Person(@NotNull String name, @NotNull double weight, @NotNull int age) {
         if (name == null || weight <= 0) {
@@ -71,17 +71,4 @@ public class Person implements Comparable<Person> {
         //      See lectures for course 02324!
         //      Also add JavaDocs for @param and @return !
     }
-
-
-    @Override
-    public int hashCode() {
-        return name.hashCode();
-
-        //       this must be implemented note that hashcode needs to be consistents
-        //      with equals (o1.equals(o1) implies o1.hashCode() == o2.hashCode())!
-        //      See lectures for course 02324
-        //      Also add JavaDocs should be added
-    }
-
-
 }
