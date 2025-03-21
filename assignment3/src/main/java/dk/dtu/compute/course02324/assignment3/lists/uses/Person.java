@@ -47,7 +47,7 @@ public class Person implements Comparable<Person> {
         // This could be automatically generated, but this automatically
         // generated representation is a bit too verbose. Therefore, we
         // chose a simpler representation here.
-        return name + ", " + weight + "kg, " + age + "years old";
+        return name + ", " + weight + " kg, " + age + " years old";
     }
 
     /*
