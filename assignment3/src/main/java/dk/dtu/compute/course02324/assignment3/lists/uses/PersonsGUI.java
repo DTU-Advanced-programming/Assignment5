@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Optional;
 
 /**
  * A GUI element that is allows the user to interact and
@@ -31,9 +32,13 @@ public class PersonsGUI extends GridPane {
 
     private GridPane personsPane;
 
-    private int weightCount = 1;
+    private Integer weightCount = 1;
 
     Label label_avg_w = new Label("Average Weight: \n"+0+" kg");
+
+    Label label_max_age = new Label("");
+
+    Label label_min_age = new Label("");
 
     private double avg_weight() {
         if (persons.isEmpty()) { return 0;}
@@ -270,6 +275,12 @@ public class PersonsGUI extends GridPane {
         label_avg_w.setText("Average Weight: \n"+avg_weight()+" kg");
         persons_mode();
         label_most_occurring.setText("Most Occurring Name: \n"+frequency_of_most_occ+" x "+max_name);
+        Optional<Person> max = persons.stream()
+                        .max((x,y) -> Integer.compare(x.getAge(),y.getAge()));
+        label_max_age.setText("Maximum Age: "+max.orElse(null).getAge());
+        Optional<Person> min = persons.stream()
+                .min((x,y) -> Integer.compare(x.getAge(),y.getAge()));
+        label_min_age.setText("Minimum Age: "+min.orElse(null).getAge());
         personsPane.getChildren().clear();
         // adds all persons to the list in the personsPane (with
         // a delete button in front of it)
