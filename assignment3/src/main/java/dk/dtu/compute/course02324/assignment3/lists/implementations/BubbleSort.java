@@ -2,10 +2,11 @@ package dk.dtu.compute.course02324.assignment3.lists.implementations;
 
 
 
-import dk.dtu.compute.course02324.assignment3.lists.types.List;
+
 
 import javax.validation.constraints.NotNull;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * This is implementing a simplistic sorting algorithm based on the

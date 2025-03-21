@@ -1,10 +1,8 @@
 package dk.dtu.compute.course02324.assignment3.lists.uses;
 
 
-import dk.dtu.compute.course02324.assignment3.lists.implementations.ArrayList;
 import dk.dtu.compute.course02324.assignment3.lists.implementations.BubbleSort;
 import dk.dtu.compute.course02324.assignment3.lists.implementations.GenericComparator;
-import dk.dtu.compute.course02324.assignment3.lists.implementations.SortedArrayList;
 import dk.dtu.compute.course02324.assignment3.lists.types.List;
 
 import java.util.Comparator;

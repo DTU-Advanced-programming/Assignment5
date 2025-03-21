@@ -1,7 +1,6 @@
 package dk.dtu.compute.course02324.assignment3.lists;
 
 import dk.dtu.compute.course02324.assignment3.lists.implementations.GenericComparator;
-import dk.dtu.compute.course02324.assignment3.lists.implementations.SortedArrayList;
 
 import org.junit.Assert;
 import org.junit.Before;
