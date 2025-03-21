@@ -3,8 +3,8 @@ package dk.dtu.compute.course02324.assignment3.lists.uses;
 
 import dk.dtu.compute.course02324.assignment3.lists.implementations.BubbleSort;
 import dk.dtu.compute.course02324.assignment3.lists.implementations.GenericComparator;
-import dk.dtu.compute.course02324.assignment3.lists.types.List;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
@@ -18,7 +18,7 @@ public class TestLists {
     public static Comparator<Person> comparator = new GenericComparator<>();
 
     public static void main(String[] args) {
-        List<Person> persons = new ArrayList<>();
+        ArrayList<Person> persons = new ArrayList<>();
 
         persons.add(new Person("Egon", 50 ));
         persons.add(new Person("Ekkart", 74));
@@ -44,7 +44,6 @@ public class TestLists {
         print(persons);
         System.out.println("--------------------");
 
-        persons = new SortedArrayList<>();
         persons.add(new Person("Egon", 50 ));
         persons.add(new Person("Ekkart", 74));
         persons.add(new Person("Anton", 84));
@@ -62,7 +61,7 @@ public class TestLists {
         // persons.sort(comparator);  // should throw an exception
     }
 
-    public static void print(List<?> list) {
+    public static void print(ArrayList<?> list) {
         for (int i = 0; i < list.size(); i++ ) {
             System.out.println(i + ": " + list.get(i));
         }

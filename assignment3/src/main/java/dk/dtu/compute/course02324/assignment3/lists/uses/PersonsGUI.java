@@ -2,7 +2,6 @@ package dk.dtu.compute.course02324.assignment3.lists.uses;
 
 
 import dk.dtu.compute.course02324.assignment3.lists.implementations.GenericComparator;
-import dk.dtu.compute.course02324.assignment3.lists.types.List;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -13,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 
@@ -27,7 +27,7 @@ public class PersonsGUI extends GridPane {
     /**
      * The list of persons to be maintained in this GUI.
      */
-    final private List<Person> persons;
+    final private ArrayList<Person> persons;
 
     private GridPane personsPane;
 
@@ -82,7 +82,7 @@ public class PersonsGUI extends GridPane {
      * @param persons the list of persons which is to be maintained in
      *                this GUI component; it must not be <code>null</code>
      */
-    public PersonsGUI(@NotNull List<Person> persons) {
+    public PersonsGUI(@NotNull ArrayList<Person> persons) {
         this.persons = persons;
 
         this.setVgap(5.0);

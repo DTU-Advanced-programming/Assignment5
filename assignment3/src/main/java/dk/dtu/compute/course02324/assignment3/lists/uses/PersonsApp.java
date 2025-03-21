@@ -1,7 +1,6 @@
 package dk.dtu.compute.course02324.assignment3.lists.uses;
 
 
-import dk.dtu.compute.course02324.assignment3.lists.types.List;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -10,6 +9,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 /**
  * A simple JavaFX application with a simple GUI for manually
@@ -63,7 +64,7 @@ public class PersonsApp extends Application {
     /**
      * Methods for creating the menu bar of the application. This menu
      * bar has a single menu, where the user can change between an
-     * {@link SortedArrayList} or an {@link ArrayList} implementation
+     *  or an {@link ArrayList} implementation
      * to be tested.
      *
      * @return the menubar for choosing the type of implementation
@@ -77,20 +78,11 @@ public class PersonsApp extends Application {
         MenuItem unsortedListItem = new MenuItem("(unsorted) List");
         unsortedListItem.setOnAction(
                 e -> {
-                    List<Person> list = new ArrayList<>();
+                    ArrayList<Person> list = new ArrayList<>();
                     switchImpl(list);
                 }
         );
         selectMenu.getItems().add(unsortedListItem);
-
-        MenuItem sortedListItem = new MenuItem("sorted List");
-        sortedListItem.setOnAction(
-                e -> {
-                    List<Person> list = new SortedArrayList<>();
-                    switchImpl(list);
-                }
-        );
-        selectMenu.getItems().add(sortedListItem);
 
         MenuItem noListItem = new MenuItem("No Implementation");
         noListItem.setOnAction(
@@ -113,7 +105,7 @@ public class PersonsApp extends Application {
      * @param list new person list for which GUI should be initialized; it can
      *              be <code>null</code>
      */
-    private void switchImpl(List<Person> list) {
+    private void switchImpl(ArrayList<Person> list) {
         // if there exists a GUI for some stack already, this GUI
         // is removed.
         if (personsGUI != null) {
