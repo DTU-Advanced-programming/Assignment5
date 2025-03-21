@@ -20,11 +20,11 @@ public class TestLists {
     public static void main(String[] args) {
         ArrayList<Person> persons = new ArrayList<>();
 
-        persons.add(new Person("Egon", 50 ));
-        persons.add(new Person("Ekkart", 74));
-        persons.add(new Person("Anton", 84));
-        persons.add(new Person("Carlos", 70));
-        persons.add(new Person("Ekkart", 70));
+        persons.add(new Person("Egon", 50, 40 ));
+        persons.add(new Person("Ekkart", 74, 35));
+        persons.add(new Person("Anton", 84, 55));
+        persons.add(new Person("Carlos", 70, 65));
+        persons.add(new Person("Ekkart", 70, 75));
 
         print(persons);
         System.out.println("--------------------");
@@ -34,7 +34,7 @@ public class TestLists {
         print(persons);
         System.out.println("--------------------");
 
-        persons.add(2, new Person("Xavi", 85));
+        persons.add(2, new Person("Xavi", 85, 25));
 
         print(persons);
         System.out.println("--------------------");
@@ -44,17 +44,17 @@ public class TestLists {
         print(persons);
         System.out.println("--------------------");
 
-        persons.add(new Person("Egon", 50 ));
-        persons.add(new Person("Ekkart", 74));
-        persons.add(new Person("Anton", 84));
-        persons.add(new Person("Carlos", 70));
-        persons.add(new Person("Ekkart", 70));
+        persons.add(new Person("Egon", 50, 25));
+        persons.add(new Person("Ekkart", 74, 35));
+        persons.add(new Person("Anton", 84, 45));
+        persons.add(new Person("Carlos", 70,55));
+        persons.add(new Person("Ekkart", 70, 65));
 
         print(persons);
         System.out.println("--------------------");
 
         // persons.add(0, new Person("Egon", 100 )); // should throw an exception
-        persons.add(new Person("Egon", 100 ));
+        persons.add(new Person("Egon", 100, 58 ));
         print(persons);
         System.out.println("--------------------");
 

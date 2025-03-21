@@ -33,6 +33,7 @@ public class PersonsGUI extends GridPane {
     private GridPane personsPane;
 
     private Integer weightCount = 1;
+    private Integer age = 0;
 
     Label label_avg_w = new Label("Average Weight: \n"+0+" kg");
 
@@ -121,12 +122,37 @@ public class PersonsGUI extends GridPane {
 
         });
 
+        //trying stuff remove this when it works start
+        TextField age_field = new TextField();
+        w_field.setPrefColumnCount(5);
+        w_field.setText(Integer.toString(age));
+        // the following is a simple way to make sure that the user can only
+        // enter Integer values to the text field
+        w_field.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                try {
+                    Integer.parseInt(newValue);
+                    age_field.setText(newValue);
+                } catch (NumberFormatException e) {
+                    if (newValue.isEmpty()) {
+                        age_field.setText("0");
+                    } else {
+                        age_field.setText(Integer.toString(age));
+                    }
+                }
+            }
+
+        });
+        //trying stuff remove this when it works end
+
         // button for adding a new person to the list (based on
         // the name in the text field (the weight is just incrementing)
         Button addButton = new Button("Add at the end of list");
         addButton.setOnAction(
                 e -> {
-                    Person person = new Person(name_field.getText(), Integer.parseInt(w_field.getText()));
+                    Person person = new Person(name_field.getText(), Integer.parseInt(w_field.getText()), Integer.parseInt(age_field.getText()));
                     persons.add(person);
                     weightCount++;
                     w_field.setText(Integer.toString(weightCount));
@@ -159,7 +185,7 @@ public class PersonsGUI extends GridPane {
         Button add_atIndexButton = new Button("Add at Index: ");
         add_atIndexButton.setOnAction(
                 e -> {
-                    Person person = new Person(name_field.getText(), Integer.parseInt(w_field.getText()));
+                    Person person = new Person(name_field.getText(), Integer.parseInt(w_field.getText()), Integer.parseInt(age_field.getText()));
                     try {
                         persons.add(Integer.parseInt(index.getText()), person);
                     } catch (IndexOutOfBoundsException err) {
@@ -207,10 +233,12 @@ public class PersonsGUI extends GridPane {
         this.setPadding(new Insets(5, 10, 5, 10)); // Top, Right, Bottom, Left
         Label l_name = new Label("Name: ");
         Label l_weight = new Label("Weight: ");
+        Label l_age = new Label("Age: ");
         VBox name = new VBox(l_name, name_field);
         name.setSpacing(5);
         VBox weight = new VBox(l_weight, w_field);
         weight.setSpacing(5);
+        VBox age = new VBox(l_age, age_field);
         HBox name_weight = new HBox(name,weight);
         name_weight.setSpacing(10);
         HBox add_at_index = new HBox(add_atIndexButton, index);
