@@ -35,6 +35,8 @@ public class PersonsGUI extends GridPane {
     private Integer weightCount = 1;
     private Integer age = 0;
 
+    Person zeroman = new Person("null",0,0);
+
     Label label_avg_w = new Label("Average Weight: \n"+0+" kg");
 
     Label label_max_age = new Label("");
@@ -124,11 +126,11 @@ public class PersonsGUI extends GridPane {
 
         //trying stuff remove this when it works start
         TextField age_field = new TextField();
-        w_field.setPrefColumnCount(5);
-        w_field.setText(Integer.toString(age));
+        age_field.setPrefColumnCount(5);
+        age_field.setText(Integer.toString(age));
         // the following is a simple way to make sure that the user can only
         // enter Integer values to the text field
-        w_field.textProperty().addListener(new ChangeListener<String>() {
+        age_field.textProperty().addListener(new ChangeListener<String>() {
 
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
@@ -234,12 +236,19 @@ public class PersonsGUI extends GridPane {
         Label l_name = new Label("Name: ");
         Label l_weight = new Label("Weight: ");
         Label l_age = new Label("Age: ");
+
+        VBox age = new VBox(l_age, age_field);
+        age.setSpacing(5);
+
         VBox name = new VBox(l_name, name_field);
         name.setSpacing(5);
+
         VBox weight = new VBox(l_weight, w_field);
         weight.setSpacing(5);
-        VBox age = new VBox(l_age, age_field);
-        HBox name_weight = new HBox(name,weight);
+
+        VBox w_age = new VBox(weight, age);
+
+        HBox name_weight = new HBox(name,w_age);
         name_weight.setSpacing(10);
         HBox add_at_index = new HBox(add_atIndexButton, index);
         add_at_index.setSpacing(15);
@@ -305,10 +314,10 @@ public class PersonsGUI extends GridPane {
         label_most_occurring.setText("Most Occurring Name: \n"+frequency_of_most_occ+" x "+max_name);
         Optional<Person> max = persons.stream()
                         .max((x,y) -> Integer.compare(x.getAge(),y.getAge()));
-        label_max_age.setText("Maximum Age: "+max.orElse(null).getAge());
+        label_max_age.setText("Maximum Age: "+max.orElse(zeroman).getAge());
         Optional<Person> min = persons.stream()
                 .min((x,y) -> Integer.compare(x.getAge(),y.getAge()));
-        label_min_age.setText("Minimum Age: "+min.orElse(null).getAge());
+        label_min_age.setText("Minimum Age: "+min.orElse(zeroman).getAge());
         personsPane.getChildren().clear();
         // adds all persons to the list in the personsPane (with
         // a delete button in front of it)

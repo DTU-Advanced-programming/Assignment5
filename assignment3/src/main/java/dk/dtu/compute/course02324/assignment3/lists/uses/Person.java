@@ -19,7 +19,7 @@ public class Person implements Comparable<Person> {
     private int age;
 
     Person(@NotNull String name, @NotNull double weight, @NotNull int age) {
-        if (name == null || weight <= 0) {
+        if (name == null || weight < 0) {
             throw new IllegalArgumentException("A persons must be initialized with a" +
                     "(non null) name and an age greater than 0");
         }
