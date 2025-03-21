@@ -39,9 +39,9 @@ public class PersonsGUI extends GridPane {
 
     Label label_avg_w = new Label("Average Weight: \n"+0+" kg");
 
-    Label label_max_age = new Label("");
+    Label label_max_age = new Label("Maximum Age: \n"+0+" years old");
 
-    Label label_min_age = new Label("");
+    Label label_min_age = new Label("Maximum Age: \n"+0+" years old");
 
     private double avg_weight() {
         if (persons.isEmpty()) { return 0;}
@@ -257,7 +257,7 @@ public class PersonsGUI extends GridPane {
         VBox buttonBox = new VBox( name_weight, addButton, add_at_index, sortButton, clearButton);
         buttonBox.setSpacing(10);
 
-        VBox valueBox = new VBox(label_avg_w, label_most_occurring);
+        VBox valueBox = new VBox(label_avg_w, label_most_occurring, label_max_age, label_min_age);
         valueBox.setSpacing(10);
         VBox actionBox = new VBox(buttonBox, valueBox);
         actionBox.setSpacing(15);
@@ -314,10 +314,10 @@ public class PersonsGUI extends GridPane {
         label_most_occurring.setText("Most Occurring Name: \n"+frequency_of_most_occ+" x "+max_name);
         Optional<Person> max = persons.stream()
                         .max((x,y) -> Integer.compare(x.getAge(),y.getAge()));
-        label_max_age.setText("Maximum Age: "+max.orElse(zeroman).getAge());
+        label_max_age.setText("Maximum Age: \n"+max.orElse(zeroman).getAge()+" years old");
         Optional<Person> min = persons.stream()
                 .min((x,y) -> Integer.compare(x.getAge(),y.getAge()));
-        label_min_age.setText("Minimum Age: "+min.orElse(zeroman).getAge());
+        label_min_age.setText("Minimum Age: \n"+min.orElse(zeroman).getAge()+" years old");
         personsPane.getChildren().clear();
         // adds all persons to the list in the personsPane (with
         // a delete button in front of it)
