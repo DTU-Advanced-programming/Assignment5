@@ -90,10 +90,10 @@ public abstract class TestForAllLists {
                 list.contains(value2));
 
 
-//        Assert.assertThrows(
-//                "Adding a null elememt does not raise an IllegalStateException",
-//                IllegalArgumentException.class,
-//                () -> { list.add(null); });
+        Assert.assertThrows(
+                "Adding a null elememt does not raise an IllegalStateException",
+                IllegalArgumentException.class,
+                () -> { list.add(null); });
 
         Assert.assertTrue(
                 "Added value1 no longer contained in list",
