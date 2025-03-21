@@ -6,6 +6,10 @@ public class Person implements Comparable<Person> {
 
     final public String name;
 
+    public double getWeight() {
+        return weight;
+    }
+
     final public double weight;
 
     public int getAge() {
