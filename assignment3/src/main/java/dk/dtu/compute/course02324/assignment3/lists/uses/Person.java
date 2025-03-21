@@ -8,6 +8,16 @@ public class Person implements Comparable<Person> {
 
     final public double weight;
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int age;
+
     Person(@NotNull String name, @NotNull double weight) {
         if (name == null || weight <= 0) {
             throw new IllegalArgumentException("A persons must be initialized with a" +
