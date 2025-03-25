@@ -227,6 +227,16 @@ public class PersonsGUI extends GridPane {
                     update();
                 });
 
+        // button for passing time
+        Button timePassButton = new Button("Time pass");
+        timePassButton.setOnAction(
+                e -> {
+                    persons.timePass();
+                    // makes sure that the GUI is updated accordingly
+                    update();
+                });
+
+
         // -------------- GUIng --------------------
 
         this.setPadding(new Insets(5, 10, 5, 10)); // Top, Right, Bottom, Left
@@ -251,7 +261,7 @@ public class PersonsGUI extends GridPane {
         add_at_index.setSpacing(15);
         // combines the above elements into vertically arranged boxes
         // which are then added to the left column of the grid pane
-        VBox buttonBox = new VBox( name_weight, addButton, add_at_index, sortButton, clearButton);
+        VBox buttonBox = new VBox( name_weight, addButton, add_at_index, sortButton, clearButton, timePassButton);
         buttonBox.setSpacing(10);
 
         VBox valueBox = new VBox(label_avg_w, label_most_occurring, label_max_age, label_min_age);

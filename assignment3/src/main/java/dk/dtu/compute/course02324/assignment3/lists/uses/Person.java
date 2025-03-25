@@ -1,6 +1,7 @@
 package dk.dtu.compute.course02324.assignment3.lists.uses;
 
 import javax.validation.constraints.NotNull;
+import java.util.Iterator;
 
 public class Person implements Comparable<Person> {
 
@@ -10,7 +11,7 @@ public class Person implements Comparable<Person> {
         return weight;
     }
 
-    final public double weight;
+    public double weight;
 
     public int getAge() {
         return age;
@@ -30,6 +31,17 @@ public class Person implements Comparable<Person> {
         this.name = name;
         this.weight = weight;
         this.age = age;
+    }
+
+    public void ageOneYear() {
+        this.age += 1;
+//        if (this.age > 30) {
+//            this.weight *= 1.08;
+//        }
+    }
+
+    public void timePass() {
+
     }
 
     @Override
