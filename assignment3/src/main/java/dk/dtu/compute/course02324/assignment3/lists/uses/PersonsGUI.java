@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 
 import javax.validation.constraints.NotNull;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * A GUI element that is allows the user to interact and
@@ -32,54 +33,63 @@ public class PersonsGUI extends GridPane {
     private Integer weightCount = 1;
     private Integer age = 0;
 
-    Person zeroman = new Person("null",0,0);
+    Label label_avg_w = new Label("Average Weight: \n" + 0 + " kg");
 
-    Label label_avg_w = new Label("Average Weight: \n"+0+" kg");
+    Label label_max_age = new Label("Maximum Age: \n" + 0 + " years old");
 
-    Label label_max_age = new Label("Maximum Age: \n"+0+" years old");
+    Label label_min_age = new Label("Maximum Age: \n" + 0 + " years old");
 
-    Label label_min_age = new Label("Maximum Age: \n"+0+" years old");
-
-    private double avg_weight() {
-        if (persons.isEmpty()) { return 0;}
-        double sum = 0;
-        for (int i = 0; i< persons.size(); i++) {
-            sum += persons.get(i).weight;
-        }
-        return sum / persons.size();
-    };
+    Label label_most_occurring = new Label("Most Occurring Name: \n" + "NA");
 
     private TextArea textAreaExceptions;
 
-    Label label_most_occurring = new Label("Most Occurring Name: \n"+"NA");
-
-    private HashMap<Person, Integer> n_counter = new HashMap<>();
-
-    private void add_to_map(Person P) {
-        if (n_counter.containsKey(P)) {
-            n_counter.replace(P,n_counter.get(P)+1);
-        } else {
-            n_counter.put(P, 1);
-        }
-    }
-
-    private void delete_from_map(Person P) {
-        n_counter.replace(P,n_counter.get(P)-1);
-    }
-
-    int frequency_of_most_occ = 0;
-    String max_name = "NA";
-
-    private void persons_mode(){
-        frequency_of_most_occ = 0;
-        if (n_counter.isEmpty()) {max_name = "NA";}
-        for (Person key : n_counter.keySet()) {
-            if (n_counter.get(key) > frequency_of_most_occ) {
-                frequency_of_most_occ = n_counter.get(key);
-                max_name = key.name;
-            }
-        }
-    }
+    //REDUNDANT CODE AFTER IMPLEMENTING STREAMS
+//    private double avg_weight() {
+//        //replaced by stream
+//        if (persons.isEmpty()) {
+//            return 0;
+//        }
+//        double sum = 0;
+//        for (int i = 0; i < persons.size(); i++) {
+//            sum += persons.get(i).weight;
+//        }
+//        return sum / persons.size();
+//    }
+//
+//    Label label_most_occurring = new Label("Most Occurring Name: \n" + "NA");
+//
+//    private HashMap<String, Integer> n_counter = new HashMap<>();
+//
+//    private void add_to_map(Person P) {
+//        //replaced by stream
+//        if (n_counter.containsKey(P.name)) {
+//            n_counter.replace(P.name, n_counter.get(P.name) + 1);
+//        } else {
+//            n_counter.put(P.name, 1);
+//        }
+//    }
+//
+//    private void delete_from_map(Person P) {
+//        //replaced by stream
+//        n_counter.replace(P.name, n_counter.get(P.name) - 1);
+//    }
+//
+//    int frequency_of_most_occ = 0;
+//    String max_name = "NA";
+//
+//    private void persons_mode() {
+//        //replaced by stream
+//        frequency_of_most_occ = 0;
+//        if (n_counter.isEmpty()) {
+//            max_name = "NA";
+//        }
+//        for (String key : n_counter.keySet()) {
+//            if (n_counter.get(key) > frequency_of_most_occ) {
+//                frequency_of_most_occ = n_counter.get(key);
+//                max_name = key;
+//            }
+//        }
+//    }
 
     /**
      * Constructor which sets up the GUI attached a list of persons.
@@ -155,7 +165,6 @@ public class PersonsGUI extends GridPane {
                     persons.add(person);
                     weightCount++;
                     w_field.setText(Integer.toString(weightCount));
-                    add_to_map(person);
                     // makes sure that the GUI is updated accordingly
                     update();
                 });
@@ -188,12 +197,11 @@ public class PersonsGUI extends GridPane {
                     try {
                         persons.add(Integer.parseInt(index.getText()), person);
                     } catch (IndexOutOfBoundsException err) {
-                        textAreaExceptions.appendText(err.getMessage()+"\n");
+                        textAreaExceptions.appendText(err.getMessage() + "\n");
                     }
                     weightCount++;
                     w_field.setText(Integer.toString(weightCount));
                     index.setText("0");
-                    add_to_map(person);
                     // makes sure that the GUI is updated accordingly
                     update();
                 });
@@ -210,7 +218,7 @@ public class PersonsGUI extends GridPane {
                         persons.sort(comparator);
 
                     } catch (UnsupportedOperationException err) {
-                        textAreaExceptions.appendText(err.getMessage()+"\n");
+                        textAreaExceptions.appendText(err.getMessage() + "\n");
                     }
                     // makes sure that the GUI is updated accordingly
                     update();
@@ -222,7 +230,6 @@ public class PersonsGUI extends GridPane {
                 e -> {
                     persons.clear();
                     weightCount = 0;
-                    n_counter = new HashMap<>();
                     // makes sure that the GUI is updated accordingly
                     update();
                 });
@@ -255,7 +262,7 @@ public class PersonsGUI extends GridPane {
 
         VBox w_age = new VBox(weight, age);
 
-        HBox name_weight = new HBox(name,w_age);
+        HBox name_weight = new HBox(name, w_age);
         name_weight.setSpacing(10);
         HBox add_at_index = new HBox(add_atIndexButton, index);
         add_at_index.setSpacing(15);
@@ -302,7 +309,7 @@ public class PersonsGUI extends GridPane {
 
         // ... and adds these elements to the right-hand columns of
         // the grid pane
-        VBox personsList = new VBox(labelPersonsList, scrollPane,labelExceptions, scrollPane_e);
+        VBox personsList = new VBox(labelPersonsList, scrollPane, labelExceptions, scrollPane_e);
         personsList.setSpacing(5.0);
         this.add(personsList, 1, 0);
 
@@ -316,29 +323,41 @@ public class PersonsGUI extends GridPane {
      * from the list.
      */
     private void update() {
-        OptionalDouble avg = persons.stream()
-                .mapToDouble(Person::getWeight)
-                                .average();
-        label_avg_w.setText("Average Weight: \n"+avg.orElse(0)+" kg");
-        persons_mode();
-        label_most_occurring.setText("Most Occurring Name: \n"+frequency_of_most_occ+" x "+max_name);
-        Optional<Person> max = persons.stream()
-                        .max((x,y) -> Integer.compare(x.getAge(),y.getAge()));
-        label_max_age.setText("Maximum Age: \n"+max.orElse(zeroman).getAge()+" years old");
-        Optional<Person> min = persons.stream()
-                .min((x,y) -> Integer.compare(x.getAge(),y.getAge()));
-        label_min_age.setText("Minimum Age: \n"+min.orElse(zeroman).getAge()+" years old");
+        double avg = persons.stream()
+                .mapToDouble((Person -> Person.weight))
+                .average()
+                .orElse(0);
+        label_avg_w.setText("Average Weight: \n" + avg + " kg");
+
+        Map.Entry<String, Long> f_most_occ = persons.stream().collect(
+                Collectors.groupingBy(Person -> Person.name,Collectors.counting()))
+                .entrySet().stream()
+                .max((x,y) -> x.getValue().compareTo(y.getValue()))
+                .orElse(Map.entry("NA",0L));
+        label_most_occurring.setText("Most Occurring Name: \n" + f_most_occ.getKey() + " x " + f_most_occ.getValue());
+
+        int max = persons.stream()
+                .map(Person::getAge)
+                .max(Integer::compare)
+                .orElse(0);
+        label_max_age.setText("Maximum Age: \n" + max + " years old");
+
+        int min = persons.stream()
+                .map(Person::getAge)
+                .min(Integer::compare)
+                .orElse(0);
+        label_min_age.setText("Minimum Age: \n" + min + " years old");
+
         personsPane.getChildren().clear();
         // adds all persons to the list in the personsPane (with
         // a delete button in front of it)
-        for (int i=0; i < persons.size(); i++) {
+        for (int i = 0; i < persons.size(); i++) {
             Person person = persons.get(i);
             Label personLabel = new Label(i + ": " + person.toString());
             Button deleteButton = new Button("Delete");
             deleteButton.setOnAction(
                     e -> {
                         persons.remove(person);
-                        delete_from_map(person);
                         update();
                     }
             );

@@ -7,10 +7,6 @@ public class Person implements Comparable<Person> {
 
     final public String name;
 
-    public double getWeight() {
-        return weight;
-    }
-
     public double weight;
 
     public int getAge() {
@@ -31,17 +27,6 @@ public class Person implements Comparable<Person> {
         this.name = name;
         this.weight = weight;
         this.age = age;
-    }
-
-    public void ageOneYear() {
-        this.age += 1;
-//        if (this.age > 30) {
-//            this.weight *= 1.08;
-//        }
-    }
-
-    public void timePass() {
-
     }
 
     @Override
