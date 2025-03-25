@@ -325,16 +325,19 @@ public class PersonsGUI extends GridPane {
                 .max((x,y) -> x.getValue().compareTo(y.getValue()))
                 .orElse(Map.entry("NA",0L));
         label_most_occurring.setText("Most Occurring Name: \n" + f_most_occ.getKey() + " x " + f_most_occ.getValue());
+
         int max = persons.stream()
                 .map(Person::getAge)
                 .max(Integer::compare)
                 .orElse(0);
         label_max_age.setText("Maximum Age: \n" + max + " years old");
+
         int min = persons.stream()
                 .map(Person::getAge)
                 .min(Integer::compare)
                 .orElse(0);
         label_min_age.setText("Minimum Age: \n" + min + " years old");
+
         personsPane.getChildren().clear();
         // adds all persons to the list in the personsPane (with
         // a delete button in front of it)
