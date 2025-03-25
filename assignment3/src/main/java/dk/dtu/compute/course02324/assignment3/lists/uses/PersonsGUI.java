@@ -91,6 +91,21 @@ public class PersonsGUI extends GridPane {
 //        }
 //    }
 
+    private void timePass(){
+        List<Person> tmp = persons.stream()
+                .map(p -> {
+            p.setAge(p.getAge()+1);
+            return p;})
+                .map(p -> {
+                    if (p.getAge()>30) {p.weight *= 1.08;}
+                    return p;
+                })
+                .filter(p -> p.getAge()<=99)
+                .toList();
+        persons.clear();
+        persons.addAll(tmp);
+    }
+
     /**
      * Constructor which sets up the GUI attached a list of persons.
      *
@@ -238,7 +253,7 @@ public class PersonsGUI extends GridPane {
         Button timePassButton = new Button("Time pass");
         timePassButton.setOnAction(
                 e -> {
-                    persons.timePass();
+                    timePass();
                     // makes sure that the GUI is updated accordingly
                     update();
                 });
